@@ -7,4 +7,5 @@
 == 推奨されるシステム環境
 
 * Ruby 2.3.1
+* Rails 5.0.1
 * MySQL 5.6 またはPostgreSQL 9.3
