@@ -13,10 +13,13 @@ class Staff::SessionsController < Staff::Base
     @form = Staff::LoginForm.new(user_params)
     staff_member = StaffMember.find_by(email_for_index: @form.email.downcase) if @form.email.present?
 
-    if staff_member
+    # FIX_ME 別メソッドに分けたい人生だった...
+    if Staff::Authenticator.new(staff_member).authenticate(@form.password)
       session[:staff_member_id] = staff_member.id
+      flash.notice = 'ログイン成功'
       redirect_to :staff_root
     else
+      staff_member.suspended ? flash.now.alert = 'アカウントが停止されています。' : flash.now.alert = 'メールアドレスまたはパスワードが正しくありません。'
       render action: 'new'
     end
   end
