@@ -12,7 +12,7 @@ module Baukis
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     config.generators.template_engine = :slim
-
+    config.action_controller.permit_all_parameters = true
     config.time_zone = 'Tokyo'
     config.i18n.load_path +=
       Dir[Rails.root.join('config', 'locales', '**', '*{rb.yml}').to_s]
